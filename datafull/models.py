@@ -1,7 +1,8 @@
 from django.db import models
 from postgres_copy import CopyManager
 
-# Create your models here.
+
+
 class Csv(models.Model):
   file_name = models.FileField(upload_to='csvs')
   uploaded = models.DateTimeField(auto_now_add=True)
@@ -22,9 +23,19 @@ class Sale(models.Model):
   Country= models.CharField(max_length=255,null=True,blank=True)
   objects = CopyManager()
 
+
+
+  @classmethod
+  def search_sale(cls,search_term):
+        sale = cls.objects.filter(Description__icontains=search_term)
+        return sale    
+
+
   def __str__(self):
         return str(self.StockCode)
 
+  class Meta:
+        ordering = ['-pk']     
+      
 
-  def save_sale(self):
-        self.save()
+
