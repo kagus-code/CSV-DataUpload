@@ -1,4 +1,5 @@
 from django.db import models
+from postgres_copy import CopyManager
 
 # Create your models here.
 class Csv(models.Model):
@@ -11,14 +12,15 @@ class Csv(models.Model):
 
 
 class Sale(models.Model):
-  InvoiceNo = models.IntegerField(null=True , blank=True)
-  StockCode= models.CharField(max_length=200, null=True, blank=True,unique=True)
+  InvoiceNo = models.CharField(max_length=200, null=True, blank=True)
+  StockCode= models.CharField(max_length=200, null=True, blank=True)
   Description= models.CharField(max_length=255,null=True,blank=True)
-  Quantity = models.PositiveIntegerField(null=True , blank=True, default=0)
+  Quantity = models.IntegerField(null=True , blank=True)
   InvoiceDate= models.CharField(max_length=200, null=True, blank=True,)
   UnitPrice = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-  CustomerID=models.IntegerField(null=True , blank=True)
+  CustomerID=models.CharField(max_length=255,null=True,blank=True)
   Country= models.CharField(max_length=255,null=True,blank=True)
+  objects = CopyManager()
 
   def __str__(self):
         return str(self.StockCode)

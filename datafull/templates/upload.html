@@ -1,5 +1,59 @@
-{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
 
-{% block content %}
-{{block.super}}
-{% endblock %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Upload CSV file</title>
+  {{form.media}}
+
+{% block styles %} 
+{% bootstrap_css %}
+ 
+  {% endblock %}
+
+</head>
+
+<body>
+  
+<div class="container-fluid" style="padding-top: 4rem;">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h1 class="text-center">Date today {{date|date:"l d-F Y"}}</h1> 
+      <hr>
+      <br>
+
+      <form  action="{%url 'landingPage'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+    
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-success btn-lg" value="Post">
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+
+<hr>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+   {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
+
+</body>
+
+</html>
