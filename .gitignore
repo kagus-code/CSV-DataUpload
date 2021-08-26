@@ -1,0 +1,10 @@
+/virtual
+*.pyc
+**/.vscode/
+__pycache__/
+.env
+_migrations/*
+migrations/
+/migrations
+/migrations
+migrations
