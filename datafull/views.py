@@ -10,7 +10,9 @@ from django.core.management.base import BaseCommand
 
 # Create your views here.
 
-
+def success(request):
+    return render(request, 'success.html')
+    
 def upload(request):
     date = dt.date.today()
     if request.method == 'POST':
@@ -31,7 +33,9 @@ def upload(request):
                 print(f"{insert_count} records inserted")
                 Csv.objects.filter(activated=False).update(activated=True)
 
-            return redirect(upload)
+            return redirect(success)
     else:
         form = CsvModelForm
     return render(request, 'upload.html', {"date": date, 'form': form})
+
+

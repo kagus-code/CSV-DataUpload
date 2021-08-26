@@ -12,6 +12,7 @@ from . import views
 
 urlpatterns = [
     re_path(r'^$', views.upload,name='landingPage'),
+    re_path(r'^success', views.success,name='success'),
 
 
 
